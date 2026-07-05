@@ -778,14 +778,31 @@ body[data-theme="light"] .alt-item { border-bottom-color: rgba(109,101,128,.12);
 }
 
 .priority-rank {
-  min-height: 17px;
-  display: block;
-  margin-bottom: 7px;
-  color: var(--pink);
-  font-size: 10px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 26px;
+  height: 26px;
+  display: grid;
+  place-items: center;
+  border-radius: 999px;
+  background: transparent;
+  color: transparent;
+  border: 1px solid transparent;
+  font-size: 12px;
   font-weight: 900;
-  letter-spacing: .08em;
-  text-transform: uppercase;
+  opacity: 0;
+  transform: scale(.85);
+  transition: .16s ease;
+}
+
+.priority-rank.visible {
+  background: linear-gradient(135deg, var(--purple), var(--pink));
+  color: white;
+  border-color: rgba(255,255,255,.18);
+  box-shadow: 0 5px 14px rgba(155,109,243,.28);
+  opacity: 1;
+  transform: scale(1);
 }
 
 .helper-warning {
@@ -877,4 +894,9 @@ body[data-theme="light"] .alt-item { border-bottom-color: rgba(109,101,128,.12);
   .stage-card {
     min-height: 0;
   }
+}
+
+
+.priority-card {
+  padding-right: 46px;
 }

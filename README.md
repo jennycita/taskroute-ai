@@ -32,8 +32,9 @@ The goal is not to recommend the most powerful AI every time. The goal is to rec
 
 Users can select up to two priorities.
 
-- The first selection is the **primary priority**
-- The second selection is the **secondary priority**
+- The first selection is marked with a visible **1** and becomes the primary priority
+- The second selection is marked with a visible **2** and becomes the secondary priority
+- TaskRoute evaluates the choices in that order
 - A third selection is blocked so the recommendation does not become contradictory or unfocused
 
 Available priorities:
@@ -48,6 +49,31 @@ This allows combinations such as:
 - Quality first, cost second
 - Speed first, quality second
 - Cost first, speed second
+
+## Task categories
+
+The task-category section is separate from the priority section.
+
+Priorities describe what the user values most:
+
+- Balanced
+- Cost
+- Speed
+- Quality
+
+Categories describe the kind of work being done:
+
+- Coding
+- Design
+- Research
+- Writing
+- Images
+- Music
+- Video
+- Data
+- Existing project
+
+Users can select multiple categories when a task crosses more than one area.
 
 ## Music routing
 
@@ -116,6 +142,8 @@ The recommendation depends on whether the user wants fast social editing, AI-ass
 - dark and light modes
 - responsive desktop and mobile layout
 - descriptive onboarding and examples
+- clearly separated priorities and task categories
+- visible 1 and 2 markers for primary and secondary priorities
 - task classification
 - up to two ranked priorities
 - platform, model, effort, workspace, and workflow recommendations

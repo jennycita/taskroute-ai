@@ -795,7 +795,7 @@ Please help me complete the preparation step for this workflow. Keep the solutio
                   <div className="section-label-row">
                     <div>
                       <span>What matters most?</span>
-                      <small>Choose one primary priority and, optionally, one secondary priority.</small>
+                      <small>Choose your main priority and, optionally, a second priority. TaskRoute will use them in order.</small>
                     </div>
                     <span className="selection-count">{priorities.length}/2 selected</span>
                   </div>
@@ -809,8 +809,8 @@ Please help me complete the preparation step for this workflow. Keep the solutio
                           className={`priority-card ${index >= 0 ? "selected" : ""}`}
                           onClick={() => selectPriority(value)}
                         >
-                          <span className="priority-rank">
-                            {index === 0 ? "Primary" : index === 1 ? "Secondary" : ""}
+                          <span className={`priority-rank ${index >= 0 ? "visible" : ""}`}>
+                            {index === 0 ? "1" : index === 1 ? "2" : ""}
                           </span>
                           <strong>{label}</strong>
                           <small>{description}</small>
@@ -824,8 +824,8 @@ Please help me complete the preparation step for this workflow. Keep the solutio
                 <div className="guided-section">
                   <div className="section-label-row">
                     <div>
-                      <span>What kind of task is it?</span>
-                      <small>Select anything that helps describe the work.</small>
+                      <span>What kind of work is this?</span>
+                      <small>Select the categories that best describe your task. This helps TaskRoute understand which tools and workflow you need.</small>
                     </div>
                   </div>
 
@@ -852,8 +852,8 @@ Please help me complete the preparation step for this workflow. Keep the solutio
                   <div className="guided-section media-stage-section">
                     <div className="section-label-row">
                       <div>
-                        <span>What stage are you at?</span>
-                        <small>This prevents TaskRoute from recommending a chat app when you need the finished media.</small>
+                        <span>What do you need to do with the media?</span>
+                        <small>Choose whether you are planning it, creating the finished result, or editing something you already have.</small>
                       </div>
                     </div>
 
