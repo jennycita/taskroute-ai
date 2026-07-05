@@ -2,17 +2,6 @@
 
 import { useEffect, useMemo, useState } from "react";
 
-type SavedRoute = {
-  id: string;
-  task: string;
-  title: string;
-  workspace: string;
-  effort: string;
-  usage: string;
-  switchAdvice: string;
-  createdAt: string;
-};
-
 type Route = {
   title: string;
   platform: string;
@@ -636,23 +625,11 @@ export default function Home() {
   const [result, setResult] = useState<Route | null>(null);
   const [showCompare, setShowCompare] = useState(false);
   const [copied, setCopied] = useState(false);
-  const [savedNotice, setSavedNotice] = useState(false);
   const [showMatchInfo, setShowMatchInfo] = useState(false);
-  const [view, setView] = useState<"home" | "history" | "saved">("home");
-  const [history, setHistory] = useState<SavedRoute[]>([]);
-  const [saved, setSaved] = useState<SavedRoute[]>([]);
 
   useEffect(() => {
     const savedTheme = localStorage.getItem("taskrouteTheme") as "dark" | "light" | null;
     if (savedTheme) setTheme(savedTheme);
-
-    try {
-      setHistory(JSON.parse(localStorage.getItem("taskrouteHistory") || "[]"));
-      setSaved(JSON.parse(localStorage.getItem("taskrouteSaved") || "[]"));
-    } catch {
-      setHistory([]);
-      setSaved([]);
-    }
   }, []);
 
   useEffect(() => {
@@ -719,53 +696,12 @@ Please help me complete the preparation step for this workflow. Keep the solutio
     const match = applyPriorities(baseRoute, priorities);
     setResult(match);
 
-    const advice = buildSwitchAdvice(match, tool);
-    const item: SavedRoute = {
-      id: crypto.randomUUID(),
-      task: task.trim(),
-      title: match.title,
-      workspace: match.workspace,
-      effort: match.effort,
-      usage: match.usage,
-      switchAdvice: advice,
-      createdAt: new Date().toISOString()
-    };
-
-    setHistory((current) => {
-      const updated = [item, ...current].slice(0, 30);
-      localStorage.setItem("taskrouteHistory", JSON.stringify(updated));
-      return updated;
-    });
   }
 
   async function copyPrompt() {
     await navigator.clipboard.writeText(readyPrompt);
     setCopied(true);
     setTimeout(() => setCopied(false), 1400);
-  }
-
-  function saveRecommendation() {
-    if (!result) return;
-
-    const item: SavedRoute = {
-      id: crypto.randomUUID(),
-      task,
-      title: result.title,
-      workspace: result.workspace,
-      effort: result.effort,
-      usage: result.usage,
-      switchAdvice,
-      createdAt: new Date().toISOString()
-    };
-
-    setSaved((current) => {
-      const updated = [item, ...current].slice(0, 30);
-      localStorage.setItem("taskrouteSaved", JSON.stringify(updated));
-      return updated;
-    });
-
-    setSavedNotice(true);
-    setTimeout(() => setSavedNotice(false), 1600);
   }
 
   function clearTask() {
@@ -775,38 +711,6 @@ Please help me complete the preparation step for this workflow. Keep the solutio
     setMediaStage("auto");
     setTool("not-started");
     setResult(null);
-    setView("home");
-  }
-
-  function renderRouteList(items: SavedRoute[], emptyTitle: string) {
-    if (!items.length) {
-      return (
-        <div className="empty-state">
-          <div className="empty-cat">🐾</div>
-          <h3>{emptyTitle}</h3>
-          <p>Your recommendations are stored in this browser on this device.</p>
-        </div>
-      );
-    }
-
-    return (
-      <div className="route-list">
-        {items.map((item) => (
-          <article className="route-list-item" key={item.id}>
-            <div>
-              <span className="eyebrow">{new Date(item.createdAt).toLocaleDateString()}</span>
-              <h3>{item.title}</h3>
-              <p>{item.task}</p>
-            </div>
-            <div className="route-meta">
-              <span>{item.effort}</span>
-              <span>{item.usage}</span>
-            </div>
-            <small>{item.switchAdvice}</small>
-          </article>
-        ))}
-      </div>
-    );
   }
 
   return (
@@ -820,9 +724,6 @@ Please help me complete the preparation step for this workflow. Keep the solutio
           </div>
         </div>
         <nav className="top-actions">
-          <button className={`nav-btn ${view === "home" ? "active" : ""}`} onClick={() => setView("home")}>⌂ Home</button>
-          <button className={`nav-btn ${view === "history" ? "active" : ""}`} onClick={() => setView("history")}>◷ History</button>
-          <button className={`nav-btn ${view === "saved" ? "active" : ""}`} onClick={() => setView("saved")}>♡ Saved</button>
           <button className="theme-toggle" onClick={() => setTheme(theme === "dark" ? "light" : "dark")}>
             {theme === "dark" ? "☀️ Light" : "🌙 Dark"}
           </button>
@@ -835,8 +736,6 @@ Please help me complete the preparation step for this workflow. Keep the solutio
         </aside>
 
         <section className="workspace">
-          {view === "home" && (
-            <>
               <section className="hero-card">
                 <span className="eyebrow">AI routing made simple</span>
                 <h2>Use the right AI for the job</h2>
@@ -1111,9 +1010,6 @@ Please help me complete the preparation step for this workflow. Keep the solutio
                       <strong>{result.usage}</strong>
                     </div>
                     <div className="action-row">
-                      <button className="secondary-btn" onClick={saveRecommendation}>
-                        {savedNotice ? "Saved ✓" : "♡ Save recommendation"}
-                      </button>
                       <button className="secondary-btn" onClick={clearTask}>↻ New task</button>
                     </div>
                   </article>
@@ -1189,30 +1085,6 @@ Please help me complete the preparation step for this workflow. Keep the solutio
                   </article>
                 </section>
               )}
-            </>
-          )}
-
-          {view === "history" && (
-            <section className="card collection-card">
-              <span className="eyebrow">Your routes</span>
-              <h2>History</h2>
-              <p className="collection-intro">
-                A record of recommendations generated on this browser and device. It is not synced across devices.
-              </p>
-              {renderRouteList(history, "No history yet")}
-            </section>
-          )}
-
-          {view === "saved" && (
-            <section className="card collection-card">
-              <span className="eyebrow">Keep the useful ones</span>
-              <h2>Saved recommendations</h2>
-              <p className="collection-intro">
-                Click “Save recommendation” on a result to keep it here. Saved items live in this browser on this device.
-              </p>
-              {renderRouteList(saved, "Nothing saved yet")}
-            </section>
-          )}
         </section>
       </main>
     </div>
