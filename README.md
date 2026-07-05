@@ -5,7 +5,7 @@
 Describe what you want to accomplish, and the app recommends:
 
 - the best AI platform or sequence of tools
-- the best model or model tier
+- the specific model or model tier to select
 - the right effort or reasoning level
 - the best workspace for the task
 - whether to stay with your current tool, switch, or add another tool
@@ -27,6 +27,43 @@ For example:
 TaskRoute AI reduces that confusion.
 
 The goal is not to recommend the most powerful AI every time. The goal is to recommend the **simplest, least expensive setup that can reliably complete the actual job**.
+
+
+## Model selection is mandatory
+
+TaskRoute was created to answer a specific practical question:
+
+> Which platform, model, effort level, and workspace should I use for this task?
+
+Every recommendation now includes a dedicated setup summary with:
+
+- Platform
+- Model
+- Effort
+- Workspace
+- Expected usage
+
+Every step in a multi-tool workflow also includes its own model and effort fields.
+
+When a platform does not expose a model picker, TaskRoute says:
+
+- **Platform-managed — no model selection required**
+- or **Not applicable**
+
+This prevents the app from inventing a model name or leaving the model question unanswered.
+
+## Task-match score
+
+The circular percentage is labeled **Task match**.
+
+A hover or tap tooltip explains that it represents how closely the recommendation matches:
+
+- task type
+- primary and secondary priorities
+- current tool
+- desired output
+
+The score is guidance from the current rules-based engine. It is not presented as a scientific measurement.
 
 ## Primary and secondary priorities
 
@@ -146,7 +183,10 @@ The recommendation depends on whether the user wants fast social editing, AI-ass
 - visible 1 and 2 markers for primary and secondary priorities
 - task classification
 - up to two ranked priorities
+- dedicated platform, model, effort, workspace, and usage summary
+- model and effort details for every workflow step
 - platform, model, effort, workspace, and workflow recommendations
+- labelled Task match score with hover and tap explanation
 - music planning and finished-song routing
 - video planning, generation, and editing routing
 - stay, switch, or add-another-tool guidance
