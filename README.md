@@ -52,6 +52,7 @@ TaskRoute can tell the user whether to stay with the current setup or switch.
 - stay-or-switch guidance
 - budget vs balanced vs premium comparison
 - ready-to-copy prompt generation
+- working history and saved recommendation views using browser storage
 - kawaii lo-fi visual design
 
 ## How the recommendation engine works
