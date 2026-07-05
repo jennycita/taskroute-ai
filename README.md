@@ -259,3 +259,17 @@ Because AI models, pricing, limits, and capabilities change frequently, a future
 ## License
 
 The repository uses the license included in the project. The TaskRoute AI name, branding, and artwork should be treated separately from the source-code license unless explicitly stated otherwise.
+
+## Research, learning, and planning routes
+
+TaskRoute now explicitly supports school, academic research, professional learning, and workflow organization.
+
+New visible use cases include:
+
+- academic and clinical research
+- credible source discovery and citation verification
+- source-grounded paper comparison
+- study guides and assignment planning
+- semester, workload, deadline, and calendar organization
+
+The academic workflow routes users through trusted source discovery, source-grounded synthesis, writing support, and citation management rather than treating research as a single chat prompt.
