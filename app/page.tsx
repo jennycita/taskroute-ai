@@ -770,7 +770,7 @@ Please help me complete the preparation step for this workflow. Keep the solutio
                 </p>
                 <p className="hero-support">
                   It can route a single task or show a sequence such as ChatGPT → Suno for a song,
-                  or ChatGPT → Sora or Runway for a video.
+                  or Claude → Sora or Runway for a video.
                 </p>
 
                 <div className="hero-examples">
