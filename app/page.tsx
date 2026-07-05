@@ -93,6 +93,78 @@ const routes: Record<string, Route> = {
     },
     upgrade: "Upgrade only for architecture problems, stubborn bugs, large refactors, or long autonomous builds."
   },
+  academicResearch: {
+    title: "Academic research workflow",
+    platform: "Academic databases → NotebookLM → ChatGPT or Claude",
+    model: "Source-grounded tools first; balanced general model for synthesis",
+    workspace: "PubMed or Google Scholar, then a source-grounded notebook and writing workspace",
+    effort: "Medium",
+    usage: "Moderate usage",
+    fit: 98,
+    badges: ["Academic sources", "Source-grounded synthesis", "Citation-aware"],
+    why: "School and clinical research usually need more than one chat window. Start with trusted academic sources, collect the actual papers, use a source-grounded workspace to compare them, and only then use a general model to organize your understanding or draft an outline.",
+    premiumReason: "A premium reasoning model cannot replace reliable source discovery, careful reading, or citation verification. Upgrade only when the evidence is difficult to reconcile or the assignment requires unusually deep analysis.",
+    alternatives: [
+      ["Perplexity", "Useful for discovery, but verify every source", 92],
+      ["ChatGPT with web research", "Good for guided synthesis and follow-up questions", 91],
+      ["Claude with uploaded papers", "Strong long-document comparison", 90]
+    ],
+    budget: {
+      name: "PubMed or Google Scholar + a standard chat model",
+      note: "Find and verify the papers first, then use AI for explanations, outlines, and study support.",
+      effort: "Low or Medium",
+      usage: "Low"
+    },
+    premium: {
+      name: "Deep research plus high-effort synthesis",
+      note: "Use when many studies conflict, the topic is highly technical, or the analysis carries meaningful professional consequences.",
+      effort: "High",
+      usage: "High"
+    },
+    upgrade: "Increase effort when studies conflict, methods need careful comparison, or the assignment requires critical appraisal rather than summary.",
+    workflow: [
+      { label: "Step 1", tool: "PubMed, Google Scholar, or your school library", model: "Not applicable", effort: "Medium", description: "Find credible primary studies, reviews, guidelines, and the original source material." },
+      { label: "Step 2", tool: "NotebookLM or Claude with uploaded sources", model: "Platform-managed or balanced long-context model", effort: "Medium", description: "Compare only the papers you provide, extract themes, and identify disagreements or gaps." },
+      { label: "Step 3", tool: "ChatGPT or Claude", model: "Balanced general model", effort: "Medium", description: "Turn the verified evidence into an outline, study guide, comparison table, or clear explanation in your own words." },
+      { label: "Step 4", tool: "Zotero or your required citation manager", model: "Not applicable", effort: "Not applicable", description: "Store, verify, and format the real citations. Do not rely on AI-generated references without checking them." }
+    ],
+    promptLabel: "Prompt for the source-review step"
+  },
+  workflowOrganization: {
+    title: "ChatGPT or Claude → your planning system",
+    platform: "ChatGPT or Claude → Calendar, Notion, Todoist, or another planner",
+    model: "Fast or balanced general model",
+    workspace: "A normal chat for planning, then the organizer you already use",
+    effort: "Low or Medium",
+    usage: "Low usage",
+    fit: 97,
+    badges: ["Turns goals into steps", "Schedule-ready", "Works with your current planner"],
+    why: "AI is useful for breaking a complicated semester, project, or professional workload into priorities and realistic next actions. The final plan should live in the calendar or task system you already check, not remain trapped inside a chat.",
+    premiumReason: "This is primarily a planning and organization task. A fast or balanced model is usually enough unless the workload has many hard constraints or dependencies.",
+    alternatives: [
+      ["Notion AI", "Useful when your work already lives in Notion", 91],
+      ["Gemini with Google Workspace", "Helpful for Google-based schedules and documents", 89],
+      ["Microsoft Copilot", "Useful inside Microsoft 365 workflows", 87]
+    ],
+    budget: {
+      name: "A fast general model + your existing calendar",
+      note: "Use AI to create the plan, then transfer only the concrete actions and deadlines.",
+      effort: "Low",
+      usage: "Very low"
+    },
+    premium: {
+      name: "A higher-reasoning planning model",
+      note: "Use only for complicated constraints, major projects, or plans with many dependencies.",
+      effort: "High",
+      usage: "High"
+    },
+    upgrade: "Increase effort only when the plan has many competing deadlines, dependencies, or difficult tradeoffs.",
+    workflow: [
+      { label: "Step 1", tool: "ChatGPT or Claude", model: "Fast or balanced general model", effort: "Low or Medium", description: "Turn responsibilities, deadlines, and available time into priorities, milestones, and next actions." },
+      { label: "Step 2", tool: "Calendar, Notion, Todoist, or your preferred planner", model: "Not applicable", effort: "Not applicable", description: "Place the approved tasks, deadlines, and recurring routines in the system you actually use." }
+    ],
+    promptLabel: "Prompt for the planning step"
+  },
   research: {
     title: "Perplexity",
     platform: "Perplexity",
@@ -461,6 +533,8 @@ function analyzeTask(text: string, tags: string[], mediaStage: string) {
   const existing = tags.includes("existing") || has("existing", "already built", "already have", "current app", "redesign");
   const design = tags.includes("design") || has("design", "layout", "color", "typography", "ui", "ux", "css", "style");
   const coding = tags.includes("coding") || has("app", "website", "code", "bug", "feature", "database", "api", "build");
+  const academic = tags.includes("learning") || has("school", "student", "study", "studying", "class", "course", "assignment", "academic", "literature review", "pubmed", "google scholar", "clinical research", "nursing", "nurse practitioner", "evidence based", "citation", "citations", "journal article", "exam", "study guide");
+  const organization = tags.includes("planning") || has("organize my workflow", "organize my work", "organize my semester", "weekly plan", "study schedule", "deadlines", "calendar", "task list", "time management", "project plan", "workflow organization");
   const research = tags.includes("research") || has("research", "sources", "latest", "compare", "evidence", "paper");
   const writing = tags.includes("writing") || has("write", "rewrite", "draft", "email", "post", "article", "caption");
   const image = tags.includes("image") || has("image", "logo", "illustration", "picture", "poster", "graphic");
@@ -476,6 +550,8 @@ function analyzeTask(text: string, tags: string[], mediaStage: string) {
     return wantsCreate ? routes.videoGenerate : routes.videoPlan;
   }
   if (design && existing) return routes.designExisting;
+  if (academic && (research || has("study", "assignment", "paper", "evidence", "citation", "clinical"))) return routes.academicResearch;
+  if (organization) return routes.workflowOrganization;
   if (image) return routes.image;
   if (data) return routes.data;
   if (research) return routes.research;
@@ -755,7 +831,7 @@ Please help me complete the preparation step for this workflow. Keep the solutio
 
       <main className="layout">
         <aside className="cozy-panel">
-          <img src="/sidebar-illustration.png" alt="Kawaii lo-fi girl with cat illustration" />
+          <img src="/sidebar-illustration.png" alt="Kawaii cat routing tasks between AI tools" />
         </aside>
 
         <section className="workspace">
@@ -766,33 +842,41 @@ Please help me complete the preparation step for this workflow. Keep the solutio
                 <h2>Use the right AI for the job</h2>
                 <p className="hero-copy">
                   Describe the result you want. TaskRoute recommends the best platform, model,
-                  effort level, workspace, or multi-tool workflow to complete it.
+                  effort level, workspace, or multi-tool workflow for research, learning, planning,
+                  writing, coding, creative work, and more.
                 </p>
                 <p className="hero-support">
-                  It can route a single task or show a sequence such as ChatGPT → Suno for a song,
-                  or Claude → Sora or Runway for a video.
+                  It can route a single task or map a complete sequence, from finding credible sources
+                  and organizing a semester to building an app, creating music, or producing video.
                 </p>
 
                 <div className="hero-examples">
                   <article>
+                    <span>📚</span>
+                    <div>
+                      <strong>Researching or studying?</strong>
+                      <p>Find credible sources, compare papers, build study guides, and verify citations.</p>
+                    </div>
+                  </article>
+                  <article>
+                    <span>🗓️</span>
+                    <div>
+                      <strong>Organizing your work?</strong>
+                      <p>Turn deadlines, responsibilities, and goals into a practical workflow.</p>
+                    </div>
+                  </article>
+                  <article>
                     <span>💻</span>
                     <div>
                       <strong>Building or redesigning?</strong>
-                      <p>Find the right coding workspace and effort level.</p>
+                      <p>Find the right coding workspace, model, and effort level.</p>
                     </div>
                   </article>
                   <article>
-                    <span>🎵</span>
+                    <span>✨</span>
                     <div>
-                      <strong>Creating music?</strong>
-                      <p>Separate lyric and prompt development from finished song generation.</p>
-                    </div>
-                  </article>
-                  <article>
-                    <span>🎬</span>
-                    <div>
-                      <strong>Making video?</strong>
-                      <p>Plan the script and shots, then route the final production to a video tool.</p>
+                      <strong>Creating something?</strong>
+                      <p>Route writing, images, music, and video through the tools that fit each step.</p>
                     </div>
                   </article>
                 </div>
@@ -810,14 +894,15 @@ Please help me complete the preparation step for this workflow. Keep the solutio
                   maxLength={500}
                   value={task}
                   onChange={(event) => setTask(event.target.value)}
-                  placeholder="Example: I want to create a complete 90s alternative-rock theme song with vocals for my show. Which tools and workflow should I use?"
+                  placeholder="Example: I need to research a clinical topic, compare credible studies, organize my notes, and build a study plan. Which tools and workflow should I use?"
                 />
 
                 <div className="input-footer">
                   <div className="examples">
+                    <button className="example-chip" onClick={() => setTask("Research a clinical topic for school, compare credible studies, and create a source-based outline with verified citations.")}>Research for school</button>
+                    <button className="example-chip" onClick={() => setTask("Organize my assignments, deadlines, study blocks, and weekly responsibilities into a realistic workflow.")}>Plan my workload</button>
                     <button className="example-chip" onClick={() => setTask("Build a simple web app that helps me organize my weekly goals.")}>Build an app</button>
                     <button className="example-chip" onClick={() => setTask("Create a complete 90s alternative-rock theme song with vocals for my show.")}>Make a song</button>
-                    <button className="example-chip" onClick={() => setTask("Create a short cinematic promotional video from a script and reference image.")}>Make a video</button>
                   </div>
                   <span>{task.length}/500</span>
                 </div>
@@ -864,7 +949,9 @@ Please help me complete the preparation step for this workflow. Keep the solutio
                     {[
                       ["coding", "💻 Coding"],
                       ["design", "🎨 Design"],
-                      ["research", "📚 Research"],
+                      ["research", "🔎 Research"],
+                      ["learning", "📚 Learning & school"],
+                      ["planning", "🗓️ Planning & organization"],
                       ["writing", "✍️ Writing"],
                       ["image", "🖼️ Images"],
                       ["music", "🎵 Music"],
