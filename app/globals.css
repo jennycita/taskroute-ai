@@ -1105,30 +1105,35 @@ body[data-theme="light"] .alt-item { border-bottom-color: rgba(109,101,128,.12);
 
 .why-taskroute-points article {
   display: flex;
-  gap: 11px;
+  gap: 12px;
   align-items: flex-start;
-  padding: 13px;
+  padding: 15px;
   border-radius: 16px;
-  background: rgba(255,255,255,.55);
-  border: 1px solid rgba(155,109,243,.12);
+  background:
+    linear-gradient(135deg, rgba(255,255,255,.98), rgba(248,242,255,.96));
+  border: 1px solid rgba(155,109,243,.22);
+  box-shadow: 0 8px 22px rgba(35, 24, 52, .12);
 }
 
 .why-taskroute-points article > span {
-  font-size: 20px;
+  font-size: 21px;
   line-height: 1;
+  flex: 0 0 auto;
 }
 
 .why-taskroute-points strong {
   display: block;
-  margin-bottom: 3px;
-  color: var(--ink);
+  margin-bottom: 4px;
+  color: #2c2238;
+  font-weight: 900;
 }
 
 .why-taskroute-points p {
   margin: 0;
-  color: var(--muted);
+  color: #62576f;
   font-size: 13px;
-  line-height: 1.45;
+  line-height: 1.5;
+  font-weight: 600;
 }
 
 @media (max-width: 760px) {
