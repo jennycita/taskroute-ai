@@ -320,7 +320,7 @@ const routes: Record<string, Route> = {
     promptLabel: "Prompt for the video-planning step"
   },
   videoGenerate: {
-    title: "Claude → Sora or Runway",
+    title: "ChatGPT → Sora or Runway",
     platform: "ChatGPT or Claude → Sora or Runway",
     model: "GPT-5.5 Instant or Claude Sonnet 5; video model is platform-managed",
     workspace: "Plan the scenes in chat, then generate the final video in a dedicated video tool",
