@@ -273,3 +273,12 @@ New visible use cases include:
 - semester, workload, deadline, and calendar organization
 
 The academic workflow routes users through trusted source discovery, source-grounded synthesis, writing support, and citation management rather than treating research as a single chat prompt.
+
+## Why this motivation appears in the app
+
+The homepage now includes a short “Why TaskRoute exists” section explaining two common problems:
+
+- users default to the most powerful model even when a faster or cheaper option is sufficient
+- users may choose the right model for planning but the wrong tool for producing the final result
+
+This gives visitors a reason to try the app before they reach the task form.
