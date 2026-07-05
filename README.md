@@ -1,55 +1,127 @@
 # TaskRoute AI
 
-**TaskRoute AI helps people choose the right AI setup for a specific task.**
+**TaskRoute AI helps people choose the right AI setup or workflow for a specific result.**
 
-Describe what you are trying to do, and the app recommends:
+Describe what you want to accomplish, and the app recommends:
 
-- the best AI platform
+- the best AI platform or sequence of tools
 - the best model or model tier
 - the right effort or reasoning level
 - the best workspace for the task
-- whether to stay with your current tool or switch
+- whether to stay with your current tool, switch, or add another tool
 - a budget option
 - a premium option
-- a ready-to-use prompt
+- a ready-to-use prompt for the next step
 
 ## Why this exists
 
-AI users often choose the most powerful model by default, even when a faster or cheaper option would work just as well. Others use the right model in the wrong place, such as trying to manage a large codebase in a normal chat.
+AI users often choose the most powerful model by default, even when a faster or cheaper option would work just as well. They may also choose the right model for planning but the wrong tool for producing the final result.
 
-TaskRoute AI is designed to reduce that confusion.
+For example:
 
-The goal is not to recommend the most powerful AI every time. The goal is to recommend the **least expensive and simplest setup that can reliably complete the task**.
+- a chat model can help write lyrics and a strong music-generation prompt
+- a dedicated music tool is needed to generate the finished song
+- a chat model can create a script and storyboard
+- a dedicated video tool is needed to generate or edit the final video
 
-## Example use cases
+TaskRoute AI reduces that confusion.
 
-### Building an app
+The goal is not to recommend the most powerful AI every time. The goal is to recommend the **simplest, least expensive setup that can reliably complete the actual job**.
 
-TaskRoute can recommend a coding workspace, a capable coding model, and the right effort level.
+## Primary and secondary priorities
 
-### Redesigning an existing project
+Users can select up to two priorities.
 
-TaskRoute can suggest staying inside the current project and switching to a more economical model for visual changes.
+- The first selection is the **primary priority**
+- The second selection is the **secondary priority**
+- A third selection is blocked so the recommendation does not become contradictory or unfocused
 
-### Researching a current topic
+Available priorities:
 
-TaskRoute can recommend a web-connected research tool with citations.
+- Balanced
+- Cost
+- Speed
+- Quality
 
-### Writing or rewriting
+This allows combinations such as:
 
-TaskRoute can suggest a fast general model instead of an expensive reasoning model.
+- Quality first, cost second
+- Speed first, quality second
+- Cost first, speed second
 
-### Already working in an AI tool
+## Music routing
 
-TaskRoute can tell the user whether to stay with the current setup or switch.
+TaskRoute distinguishes between planning a song and creating the finished audio.
+
+### Planning or preparing
+
+Recommended for:
+
+- lyrics
+- hooks
+- structure
+- genre and mood
+- creative direction
+- generation prompts
+
+Typical workflow:
+
+1. ChatGPT or Claude for creative development
+2. Suno when the user is ready to generate the finished song
+
+### Creating the finished song
+
+Typical workflow:
+
+1. ChatGPT or Claude for lyrics and a production-ready prompt
+2. Suno for the full generated song with vocals and production
+3. Optional audio editor or DAW for final polish
+
+## Video routing
+
+TaskRoute distinguishes between planning, generating, and editing video.
+
+### Planning or preparing
+
+Recommended for:
+
+- scripts
+- storyboards
+- shot lists
+- scene prompts
+- camera direction
+- pacing and structure
+
+### Creating the finished video
+
+Typical workflow:
+
+1. ChatGPT or Claude for the script and shot prompts
+2. Sora, Runway, or another video-generation tool for the scenes
+3. A video editor for assembly, captions, sound, and final polish
+
+### Editing existing footage
+
+TaskRoute can recommend tools such as:
+
+- Runway
+- CapCut
+- Canva
+- Adobe Premiere Pro
+
+The recommendation depends on whether the user wants fast social editing, AI-assisted effects, or professional control.
 
 ## Current features
 
 - dark and light modes
 - responsive desktop and mobile layout
+- descriptive onboarding and examples
 - task classification
-- platform, model, effort, and workspace recommendations
-- stay-or-switch guidance
+- up to two ranked priorities
+- platform, model, effort, workspace, and workflow recommendations
+- music planning and finished-song routing
+- video planning, generation, and editing routing
+- stay, switch, or add-another-tool guidance
 - budget vs balanced vs premium comparison
 - ready-to-copy prompt generation
 - working history and saved recommendation views using browser storage
@@ -60,13 +132,29 @@ TaskRoute can tell the user whether to stay with the current setup or switch.
 The current version uses a lightweight rules-based engine. It looks at:
 
 - task type
+- desired output
 - project phase
 - current workspace
-- cost, speed, or quality preference
-- whether the task involves coding, research, writing, images, or data
+- primary and secondary priorities
+- whether the user needs planning, final generation, or editing
+- whether the task involves coding, research, writing, images, music, video, or data
 - whether the user is starting fresh or continuing an existing project
 
-This is an MVP. A future production version should use an updateable model catalog and a more advanced scoring engine.
+This is an MVP. A future production version should use an updateable model and tool catalog plus a more advanced scoring engine.
+
+## History and saved recommendations
+
+History and saved items are stored in the browser using local storage.
+
+They normally survive closing and reopening the browser, but they are:
+
+- device-specific
+- browser-specific
+- not synced across devices
+- removable if browser storage is cleared
+- unavailable in a new private or incognito session
+
+A future version could add accounts and database-backed syncing.
 
 ## Run locally
 
@@ -96,10 +184,10 @@ The easiest deployment path is Vercel:
 
 ## Project status
 
-This is an early working product. The interface and core recommendation flow are functional, but the model catalog is currently stored inside the app.
+This is an early working product. The interface and core recommendation flow are functional, but the model and tool catalog is currently stored inside the app.
 
-Because AI models, pricing, limits, and capabilities change frequently, a future milestone should move that catalog into an updateable database or admin panel.
+Because AI models, pricing, limits, and capabilities change frequently, a future milestone should move the catalog into an updateable database or admin panel.
 
 ## License
 
-Add your preferred open-source license before encouraging reuse or redistribution.
+The repository uses the license included in the project. The TaskRoute AI name, branding, and artwork should be treated separately from the source-code license unless explicitly stated otherwise.
