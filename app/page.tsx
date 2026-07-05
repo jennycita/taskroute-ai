@@ -763,7 +763,7 @@ Please help me complete the preparation step for this workflow. Keep the solutio
             <>
               <section className="hero-card">
                 <span className="eyebrow">AI routing made simple</span>
-                <h2>Use the right AI for the whole job</h2>
+                <h2>Use the right AI for the job</h2>
                 <p className="hero-copy">
                   Describe the result you want. TaskRoute recommends the best platform, model,
                   effort level, workspace, or multi-tool workflow to complete it.
