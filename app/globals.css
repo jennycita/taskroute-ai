@@ -1071,3 +1071,69 @@ body[data-theme="light"] .alt-item { border-bottom-color: rgba(109,101,128,.12);
     grid-template-columns: 1fr;
   }
 }
+
+
+.why-taskroute {
+  display: grid;
+  grid-template-columns: 1.1fr .9fr;
+  gap: 18px;
+  margin: 20px 0 24px;
+  padding: 20px;
+  border: 1px solid var(--border);
+  border-radius: 22px;
+  background:
+    linear-gradient(135deg, rgba(155,109,243,.09), rgba(255,141,199,.08)),
+    var(--surface);
+}
+
+.why-taskroute-heading h3 {
+  margin: 5px 0 8px;
+  font-size: clamp(20px, 2.4vw, 30px);
+  line-height: 1.08;
+}
+
+.why-taskroute-heading p {
+  margin: 0;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.why-taskroute-points {
+  display: grid;
+  gap: 10px;
+}
+
+.why-taskroute-points article {
+  display: flex;
+  gap: 11px;
+  align-items: flex-start;
+  padding: 13px;
+  border-radius: 16px;
+  background: rgba(255,255,255,.55);
+  border: 1px solid rgba(155,109,243,.12);
+}
+
+.why-taskroute-points article > span {
+  font-size: 20px;
+  line-height: 1;
+}
+
+.why-taskroute-points strong {
+  display: block;
+  margin-bottom: 3px;
+  color: var(--ink);
+}
+
+.why-taskroute-points p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.45;
+}
+
+@media (max-width: 760px) {
+  .why-taskroute {
+    grid-template-columns: 1fr;
+    padding: 16px;
+  }
+}

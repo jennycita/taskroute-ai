@@ -850,6 +850,34 @@ Please help me complete the preparation step for this workflow. Keep the solutio
                   and organizing a semester to building an app, creating music, or producing video.
                 </p>
 
+                <section className="why-taskroute" aria-labelledby="why-taskroute-title">
+                  <div className="why-taskroute-heading">
+                    <span className="eyebrow">Why TaskRoute exists</span>
+                    <h3 id="why-taskroute-title">The biggest model is not always the best route.</h3>
+                    <p>
+                      People often choose the most powerful model by default, even when a faster or
+                      cheaper option would work just as well. They may also choose the right model for
+                      planning, but the wrong tool for producing the final result.
+                    </p>
+                  </div>
+                  <div className="why-taskroute-points">
+                    <article>
+                      <span>⚡</span>
+                      <div>
+                        <strong>Use only the power you need</strong>
+                        <p>Match the model and effort level to the actual difficulty of the task.</p>
+                      </div>
+                    </article>
+                    <article>
+                      <span>🧭</span>
+                      <div>
+                        <strong>Route each step to the right tool</strong>
+                        <p>Planning, research, generation, editing, and delivery may belong in different places.</p>
+                      </div>
+                    </article>
+                  </div>
+                </section>
+
                 <div className="hero-examples">
                   <article>
                     <span>📚</span>
