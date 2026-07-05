@@ -841,42 +841,14 @@ Please help me complete the preparation step for this workflow. Keep the solutio
                 <span className="eyebrow">AI routing made simple</span>
                 <h2>Use the right AI for the job</h2>
                 <p className="hero-copy">
-                  Describe the result you want. TaskRoute recommends the best platform, model,
-                  effort level, workspace, or multi-tool workflow for research, learning, planning,
-                  writing, coding, creative work, and more.
+                  Describe what you want to accomplish. TaskRoute recommends the right platform,
+                  model, effort level, workspace, and workflow, whether the task needs one tool or several.
                 </p>
                 <p className="hero-support">
-                  It can route a single task or map a complete sequence, from finding credible sources
-                  and organizing a semester to building an app, creating music, or producing video.
+                  The biggest model is not always the best route. A faster or cheaper option may work
+                  just as well, and the right model for planning may not be the right tool for producing
+                  the final result.
                 </p>
-
-                <section className="why-taskroute" aria-labelledby="why-taskroute-title">
-                  <div className="why-taskroute-heading">
-                    <span className="eyebrow">Why TaskRoute exists</span>
-                    <h3 id="why-taskroute-title">The biggest model is not always the best route.</h3>
-                    <p>
-                      People often choose the most powerful model by default, even when a faster or
-                      cheaper option would work just as well. They may also choose the right model for
-                      planning, but the wrong tool for producing the final result.
-                    </p>
-                  </div>
-                  <div className="why-taskroute-points">
-                    <article>
-                      <span>⚡</span>
-                      <div>
-                        <strong>Use only the power you need</strong>
-                        <p>Match the model and effort level to the actual difficulty of the task.</p>
-                      </div>
-                    </article>
-                    <article>
-                      <span>🧭</span>
-                      <div>
-                        <strong>Route each step to the right tool</strong>
-                        <p>Planning, research, generation, editing, and delivery may belong in different places.</p>
-                      </div>
-                    </article>
-                  </div>
-                </section>
 
                 <div className="hero-examples">
                   <article>
