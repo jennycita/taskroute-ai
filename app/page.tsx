@@ -15,6 +15,8 @@ type SavedRoute = {
 
 type Route = {
   title: string;
+  platform: string;
+  model: string;
   workspace: string;
   effort: string;
   usage: string;
@@ -26,13 +28,15 @@ type Route = {
   budget: { name: string; note: string; effort: string; usage: string };
   premium: { name: string; note: string; effort: string; usage: string };
   upgrade: string;
-  workflow?: { label: string; tool: string; description: string }[];
+  workflow?: { label: string; tool: string; model: string; effort: string; description: string }[];
   promptLabel?: string;
 };
 
 const routes: Record<string, Route> = {
   designExisting: {
     title: "Claude Sonnet 5",
+    platform: "Claude",
+    model: "Sonnet 5",
     workspace: "Continue inside the existing coding project",
     effort: "Medium",
     usage: "Low to moderate usage",
@@ -61,6 +65,8 @@ const routes: Record<string, Route> = {
   },
   codingBuild: {
     title: "Claude Sonnet 5",
+    platform: "Claude",
+    model: "Sonnet 5",
     workspace: "Claude Code or a coding project workspace",
     effort: "Medium",
     usage: "Moderate usage",
@@ -89,6 +95,8 @@ const routes: Record<string, Route> = {
   },
   research: {
     title: "Perplexity",
+    platform: "Perplexity",
+    model: "Platform-managed search model",
     workspace: "Perplexity or another citation-first research workspace",
     effort: "Medium",
     usage: "Moderate usage",
@@ -117,6 +125,8 @@ const routes: Record<string, Route> = {
   },
   writing: {
     title: "ChatGPT",
+    platform: "ChatGPT",
+    model: "GPT-5.5 Instant",
     workspace: "Normal chat",
     effort: "Low or Medium",
     usage: "Low usage",
@@ -145,6 +155,8 @@ const routes: Record<string, Route> = {
   },
   image: {
     title: "ChatGPT image generation",
+    platform: "ChatGPT",
+    model: "GPT Image",
     workspace: "An image-generation chat",
     effort: "Medium",
     usage: "Moderate usage",
@@ -173,6 +185,8 @@ const routes: Record<string, Route> = {
   },
   data: {
     title: "ChatGPT with data analysis",
+    platform: "ChatGPT",
+    model: "GPT-5.5 Thinking",
     workspace: "A workspace that can run code and inspect files",
     effort: "Medium",
     usage: "Moderate to high usage",
@@ -201,6 +215,8 @@ const routes: Record<string, Route> = {
   },
   musicPlan: {
     title: "ChatGPT or Claude",
+    platform: "ChatGPT or Claude",
+    model: "GPT-5.5 Instant or Claude Sonnet 5",
     workspace: "A normal chat for lyrics, concept, structure, and generation prompts",
     effort: "Medium",
     usage: "Low to moderate usage",
@@ -227,13 +243,15 @@ const routes: Record<string, Route> = {
     },
     upgrade: "Move to a dedicated music generator when you are ready to create the finished audio.",
     workflow: [
-      { label: "Step 1", tool: "ChatGPT or Claude", description: "Develop the concept, lyrics, structure, genre, mood, and production prompt." },
-      { label: "Step 2", tool: "Suno", description: "Use the prepared prompt and lyrics to generate the finished song." }
+      { label: "Step 1", tool: "ChatGPT or Claude", model: "GPT-5.5 Instant or Claude Sonnet 5", effort: "Medium", description: "Develop the concept, lyrics, structure, genre, mood, and production prompt." },
+      { label: "Step 2", tool: "Suno", model: "Platform-managed — no model selection required", effort: "Not applicable", description: "Use the prepared prompt and lyrics to generate the finished song." }
     ],
     promptLabel: "Prompt for the planning step"
   },
   musicGenerate: {
     title: "ChatGPT → Suno",
+    platform: "ChatGPT or Claude → Suno",
+    model: "GPT-5.5 Instant or Claude Sonnet 5; Suno is platform-managed",
     workspace: "Plan in ChatGPT or Claude, then generate the finished song in Suno",
     effort: "Medium",
     usage: "Moderate usage",
@@ -260,14 +278,16 @@ const routes: Record<string, Route> = {
     },
     upgrade: "Do not keep upgrading the chat model. Improve the lyrics and generation prompt, then iterate in the music tool.",
     workflow: [
-      { label: "Step 1", tool: "ChatGPT or Claude", description: "Create lyrics, song structure, genre references, vocal direction, mood, and a clean generation prompt." },
-      { label: "Step 2", tool: "Suno", description: "Generate the complete song with vocals and production." },
-      { label: "Optional", tool: "Audio editor or DAW", description: "Trim, arrange, mix, or polish the generated track." }
+      { label: "Step 1", tool: "ChatGPT or Claude", model: "GPT-5.5 Instant or Claude Sonnet 5", effort: "Medium", description: "Create lyrics, song structure, genre references, vocal direction, mood, and a clean generation prompt." },
+      { label: "Step 2", tool: "Suno", model: "Platform-managed — no model selection required", effort: "Not applicable", description: "Generate the complete song with vocals and production." },
+      { label: "Optional", tool: "Audio editor or DAW", model: "Not applicable", effort: "Not applicable", description: "Trim, arrange, mix, or polish the generated track." }
     ],
     promptLabel: "Prompt to prepare your Suno generation"
   },
   videoPlan: {
     title: "ChatGPT or Claude",
+    platform: "ChatGPT or Claude",
+    model: "GPT-5.5 Instant or Claude Sonnet 5",
     workspace: "A normal chat for script, storyboard, shot list, and video prompts",
     effort: "Medium",
     usage: "Low to moderate usage",
@@ -294,13 +314,15 @@ const routes: Record<string, Route> = {
     },
     upgrade: "Move to a dedicated video generator or editor when you are ready to produce the final video.",
     workflow: [
-      { label: "Step 1", tool: "ChatGPT or Claude", description: "Write the script, storyboard, shot list, visual direction, and generation prompts." },
-      { label: "Step 2", tool: "Sora, Runway, or another video tool", description: "Generate the scenes or assemble the final video." }
+      { label: "Step 1", tool: "ChatGPT or Claude", model: "GPT-5.5 Instant or Claude Sonnet 5", effort: "Medium", description: "Write the script, storyboard, shot list, visual direction, and generation prompts." },
+      { label: "Step 2", tool: "Sora, Runway, or another video tool", model: "Platform-managed video model", effort: "Medium", description: "Generate the scenes or assemble the final video." }
     ],
     promptLabel: "Prompt for the video-planning step"
   },
   videoGenerate: {
     title: "ChatGPT → Sora or Runway",
+    platform: "ChatGPT or Claude → Sora or Runway",
+    model: "GPT-5.5 Instant or Claude Sonnet 5; video model is platform-managed",
     workspace: "Plan the scenes in chat, then generate the final video in a dedicated video tool",
     effort: "Medium",
     usage: "Moderate to high usage",
@@ -327,14 +349,16 @@ const routes: Record<string, Route> = {
     },
     upgrade: "Improve the storyboard and shot prompts before spending more video generations.",
     workflow: [
-      { label: "Step 1", tool: "ChatGPT or Claude", description: "Create the script, shot list, timing, style, camera movement, and scene prompts." },
-      { label: "Step 2", tool: "Sora or Runway", description: "Generate the video scenes from text or reference images." },
-      { label: "Step 3", tool: "Video editor", description: "Assemble clips, add audio, captions, transitions, and final polish." }
+      { label: "Step 1", tool: "ChatGPT or Claude", model: "GPT-5.5 Instant or Claude Sonnet 5", effort: "Medium", description: "Create the script, shot list, timing, style, camera movement, and scene prompts." },
+      { label: "Step 2", tool: "Sora or Runway", model: "Platform-managed video model", effort: "Medium", description: "Generate the video scenes from text or reference images." },
+      { label: "Step 3", tool: "Video editor", model: "Not applicable", effort: "Medium", description: "Assemble clips, add audio, captions, transitions, and final polish." }
     ],
     promptLabel: "Prompt to prepare your video generation"
   },
   videoEdit: {
     title: "Runway or a video editor",
+    platform: "Runway, CapCut, Canva, or Premiere Pro",
+    model: "Platform-managed or not applicable",
     workspace: "A video-editing workspace that can work with your existing footage",
     effort: "Medium",
     usage: "Moderate usage",
@@ -361,13 +385,15 @@ const routes: Record<string, Route> = {
     },
     upgrade: "Choose the editor based on the footage and finishing needs, not the most powerful chat model.",
     workflow: [
-      { label: "Step 1", tool: "ChatGPT or Claude", description: "Optional: create an edit plan, cut list, captions, titles, and scene order." },
-      { label: "Step 2", tool: "Runway, CapCut, or Premiere Pro", description: "Edit and polish the existing footage." }
+      { label: "Step 1", tool: "ChatGPT or Claude", model: "GPT-5.5 Instant or Claude Sonnet 5", effort: "Medium", description: "Optional: create an edit plan, cut list, captions, titles, and scene order." },
+      { label: "Step 2", tool: "Runway, CapCut, or Premiere Pro", model: "Platform-managed or not applicable", effort: "Medium", description: "Edit and polish the existing footage." }
     ],
     promptLabel: "Prompt for your video edit plan"
   },
   simple: {
     title: "A fast general model",
+    platform: "ChatGPT, Claude, or Gemini",
+    model: "GPT-5.5 Instant, Claude Haiku, or Gemini Flash",
     workspace: "Normal chat",
     effort: "Low",
     usage: "Very low usage",
@@ -486,6 +512,8 @@ function buildSwitchAdvice(result: Route, tool: string) {
 function applyPriorities(route: Route, priorities: string[]) {
   const adjusted: Route = {
     ...route,
+    platform: route.platform,
+    model: route.model,
     badges: [...route.badges],
     alternatives: route.alternatives.map((item) => [...item] as [string, string, number]),
     budget: { ...route.budget },
@@ -533,6 +561,7 @@ export default function Home() {
   const [showCompare, setShowCompare] = useState(false);
   const [copied, setCopied] = useState(false);
   const [savedNotice, setSavedNotice] = useState(false);
+  const [showMatchInfo, setShowMatchInfo] = useState(false);
   const [view, setView] = useState<"home" | "history" | "saved">("home");
   const [history, setHistory] = useState<SavedRoute[]>([]);
   const [saved, setSaved] = useState<SavedRoute[]>([]);
@@ -561,11 +590,13 @@ export default function Home() {
   const readyPrompt = useMemo(() => {
     if (!result) return "";
     const workflowText = result.workflow?.length
-      ? `\nRecommended workflow:\n${result.workflow.map((step) => `${step.label}: ${step.tool} — ${step.description}`).join("\n")}\n`
+      ? `\nRecommended workflow:\n${result.workflow.map((step) => `${step.label}: ${step.tool} | Model: ${step.model} | Effort: ${step.effort} — ${step.description}`).join("\n")}\n`
       : "";
 
     return `Current tool: ${toolNames[tool]}
 Recommended setup: ${result.title}
+Platform: ${result.platform}
+Model: ${result.model}
 Recommended workspace: ${result.workspace}
 Primary priority: ${priorities[0] || "balanced"}
 Secondary priority: ${priorities[1] || "none"}
@@ -916,8 +947,47 @@ Please help me complete the preparation step for this workflow. Keep the solutio
                         <p className="workspace-label">Best place: {result.workspace}</p>
                         <p className="switch-advice">{switchAdvice}</p>
                       </div>
-                      <div className="fit-score" data-score={`${result.fit}%`} />
+                      <div className="match-score">
+                        <div className="match-label">
+                          <span>Task match</span>
+                          <button
+                            type="button"
+                            className="match-info-button"
+                            aria-label="Explain task match score"
+                            aria-expanded={showMatchInfo}
+                            onClick={() => setShowMatchInfo(!showMatchInfo)}
+                            onBlur={() => setShowMatchInfo(false)}
+                          >
+                            i
+                          </button>
+                        </div>
+                        <div className="fit-score" data-score={`${result.fit}%`} />
+                        <div className={`match-tooltip ${showMatchInfo ? "visible" : ""}`} role="tooltip">
+                          How closely this recommendation matches your task type, ranked priorities,
+                          current tool, and desired output. It is a guidance score from TaskRoute&apos;s
+                          rules, not a scientific measurement.
+                        </div>
+                      </div>
                     </div>
+                    <div className="setup-summary">
+                      <article>
+                        <span>Platform</span>
+                        <strong>{result.platform}</strong>
+                      </article>
+                      <article className="model-summary">
+                        <span>Model</span>
+                        <strong>{result.model}</strong>
+                      </article>
+                      <article>
+                        <span>Effort</span>
+                        <strong>{result.effort}</strong>
+                      </article>
+                      <article>
+                        <span>Workspace</span>
+                        <strong>{result.workspace}</strong>
+                      </article>
+                    </div>
+
                     <div className="badge-row">
                       {result.badges.map((badge) => <span className="badge" key={badge}>✓ {badge}</span>)}
                     </div>
@@ -933,6 +1003,10 @@ Please help me complete the preparation step for this workflow. Keep the solutio
                               <div>
                                 <small>{step.label}</small>
                                 <h3>{step.tool}</h3>
+                                <div className="workflow-settings">
+                                  <span><b>Model:</b> {step.model}</span>
+                                  <span><b>Effort:</b> {step.effort}</span>
+                                </div>
                                 <p>{step.description}</p>
                               </div>
                             </article>
@@ -943,12 +1017,11 @@ Please help me complete the preparation step for this workflow. Keep the solutio
 
                     <div className="premium-note">
                       <span>Why not the most powerful model?</span>
-                      <p>{result.premiumReason}</p>
+                      <p><strong>Use {result.model} at {result.effort} effort.</strong> {result.premiumReason}</p>
                     </div>
-                    <div className="effort-box">
-                      <span>Effort</span>
-                      <strong>{result.effort}</strong>
-                      <small>{result.usage}</small>
+                    <div className="usage-box">
+                      <span>Expected usage</span>
+                      <strong>{result.usage}</strong>
                     </div>
                     <div className="action-row">
                       <button className="secondary-btn" onClick={saveRecommendation}>
