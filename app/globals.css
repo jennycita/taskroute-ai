@@ -533,3 +533,77 @@ body[data-theme="light"] .alt-item { border-bottom-color: rgba(109,101,128,.12);
     flex-direction: column;
   }
 }
+
+
+.hero-card {
+  margin-bottom: 16px;
+  padding: 28px;
+  border-radius: 28px;
+  border: 1px solid var(--border);
+  background:
+    radial-gradient(circle at 90% 0%, rgba(255,135,183,.12), transparent 24%),
+    radial-gradient(circle at 10% 100%, rgba(143,199,255,.10), transparent 24%),
+    var(--card);
+  box-shadow: var(--shadow);
+}
+
+.hero-card h2 {
+  margin: 6px 0 10px;
+  font-size: clamp(30px, 4vw, 46px);
+  line-height: 1.05;
+}
+
+.hero-copy {
+  max-width: 820px;
+  margin: 0;
+  color: var(--ink);
+  font-size: 18px;
+  line-height: 1.55;
+  font-weight: 700;
+}
+
+.hero-support {
+  margin: 9px 0 0;
+  color: var(--muted);
+  line-height: 1.55;
+}
+
+.hero-examples {
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.hero-examples article {
+  display: flex;
+  gap: 11px;
+  align-items: flex-start;
+  padding: 14px;
+  border-radius: 18px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+}
+
+.hero-examples article > span {
+  font-size: 22px;
+  line-height: 1;
+}
+
+.hero-examples strong {
+  display: block;
+  margin-bottom: 3px;
+}
+
+.hero-examples p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+@media (max-width: 900px) {
+  .hero-examples {
+    grid-template-columns: 1fr;
+  }
+}

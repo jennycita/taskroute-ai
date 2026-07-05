@@ -344,11 +344,49 @@ Please use ${result.effort.toLowerCase()} effort. Keep the solution practical, p
         </aside>
 
         <section className="workspace">
+
+          <section className="hero-card">
+            <span className="eyebrow">AI routing made simple</span>
+            <h2>Use the right AI for the job</h2>
+            <p className="hero-copy">
+              Describe what you are trying to do, and TaskRoute will recommend the best AI platform,
+              model, effort level, and workspace for the task.
+            </p>
+            <p className="hero-support">
+              You will also get a budget option, a premium option, stay-or-switch guidance,
+              and a ready-to-use prompt.
+            </p>
+
+            <div className="hero-examples">
+              <article>
+                <span>💻</span>
+                <div>
+                  <strong>Building something?</strong>
+                  <p>Find the right coding workspace and model.</p>
+                </div>
+              </article>
+              <article>
+                <span>📚</span>
+                <div>
+                  <strong>Researching something?</strong>
+                  <p>Choose the best tool for current sources and citations.</p>
+                </div>
+              </article>
+              <article>
+                <span>🔁</span>
+                <div>
+                  <strong>Already working?</strong>
+                  <p>Learn whether to stay with your current setup or switch.</p>
+                </div>
+              </article>
+            </div>
+          </section>
+
           <section className="card task-card">
             <div className="card-heading">
               <div>
                 <span className="eyebrow">✨ Tell me the task</span>
-                <h2>What are you trying to do?</h2>
+                <h2>Describe your task</h2>
               </div>
               <div className="cat-doodle">🐈‍⬛💻</div>
             </div>
@@ -357,7 +395,7 @@ Please use ${result.effort.toLowerCase()} effort. Keep the solution practical, p
               maxLength={500}
               value={task}
               onChange={(event) => setTask(event.target.value)}
-              placeholder="Example: I built an app and want to change the colors and layout without touching the logic."
+              placeholder="Example: I built an app and only want to change the design. Which tool, model, and effort level should I use?"
             />
 
             <div className="input-footer">
