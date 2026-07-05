@@ -444,7 +444,8 @@ Please use ${result.effort.toLowerCase()} effort. Keep the solution practical, p
         </aside>
 
         <section className="workspace">
-
+          {view === "home" && (
+          <>
           <section className="hero-card">
             <span className="eyebrow">AI routing made simple</span>
             <h2>Use the right AI for the job</h2>
@@ -488,7 +489,7 @@ Please use ${result.effort.toLowerCase()} effort. Keep the solution practical, p
                 <span className="eyebrow">✨ Tell me the task</span>
                 <h2>Describe your task</h2>
               </div>
-              <div className="cat-doodle">🐈‍⬛ 💻</div>
+              <div className="cat-doodle">🐱 💻</div>
             </div>
 
             <textarea
